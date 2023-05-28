@@ -1,14 +1,20 @@
-class Person(firstName: String, familyName: String) {
-    var fullName = "$firstName $familyName"
+import java.lang.IllegalArgumentException
+
+class Person(fullName: String) {
+    val firstName: String
+    val familyName: String
 
     init {
-        if (firstName.isEmpty() && familyName.isEmpty()) return  // 초기화 블록에서는 return 을 허용하지 않는다.
-        println("created new Person instance: $fullName")
+        val names = fullName.split(" ")
+        if (names.size != 2) {
+            throw IllegalArgumentException("Invalid name: $fullName")
+        }
+        firstName = names[0]
+        familyName = names[1]
     }
 }
 
 fun main() {
-    val person = Person("john", "doe")
-    val person2 = Person("ann", "caporicci")
-    val person3 = Person("hassan", "abid")
+    val person = Person("John Doe")
+    println(person.firstName) // John
 }

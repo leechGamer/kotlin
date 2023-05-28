@@ -1,6 +1,12 @@
-class Person (private val id: Id, private val age: Int) {
-    class Id (private val firstName: String, private val familyName: String) {
-        fun nameSake(person: Person) = person.id.firstName == firstName
+class Person (private val firstName: String, private val familyName: String) {
+    inner class Possession(val description: String) {
+        fun showOwner() = println(fullName())
     }
-    fun showMe() = println("${id.firstName} ${id.familyName}, $age") // error: 바깥쪽 class는 nested class의 private 멤버에 접근 불가
+    private fun fullName() = "$firstName $familyName"
+}
+
+fun main() {
+    val person = Person("john", "caporicci")
+    val wallet = person.Possession("Wallet")
+    wallet.showOwner()
 }

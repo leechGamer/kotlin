@@ -6,7 +6,14 @@ class Person (private val firstName: String, private val familyName: String) {
 }
 
 fun main() {
-    val person = Person("john", "caporicci")
-    val wallet = person.Possession("Wallet")
-    wallet.showOwner()
+   class Point(val x: Int, val y: Int) {
+       fun shift(dx: Int, dy: Int): Point = Point(x + dx, dy)
+       override fun toString() = "($x, $y)"
+   }
+    val p = Point(10, 10)
+    println(p.shift(-1, 3))
+}
+
+fun foo() {
+    println(Point(0,0)) // error : unresolved reference : Point
 }

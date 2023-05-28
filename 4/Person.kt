@@ -1,7 +1,18 @@
+class Person {
+    val firstName: String
+    val familyName: String
 
-class Person(val firstName: String, familyName: String) {
-        val fullName = "$firstName $familyName"
-        fun printFirstName() {
-            println(firstName)
-        }
+    constructor(firstName: String, familyName: String) {
+        this.firstName = firstName
+        this.familyName = familyName
     }
+
+    constructor(fullName: String) {
+        val names = fullName.split(" ")
+        if (names.size != 2) {
+            throw IllegalArgumentException( " Invalid name : $fullName" )
+        }
+        firstName = names[0]
+        familyName = names[1]
+    }
+}

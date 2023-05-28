@@ -1,23 +1,13 @@
-class Person {
-    var firstName: String = ""
-    var familyName: String = ""
-    var age : Int = 0
+class Person(firstName: String, familyName: String) {
+    var fullName = "$firstName $familyName"
 
-    fun fullName() = "$firstName $familyName"
-    fun showMe() {
-        println("${fullName()} : $age")
-    }
-    fun readAge() {
-        this.age = readLine()!!.toInt()
+    init {
+        println("created new Person instance: $fullName")
     }
 }
 
 fun main() {
-    val person = Person()
-
-    person.firstName = "john"
-    person.familyName = "doe"
-    person.age = 25
-
-    person.showMe() // john doe : 25
+    val person = Person("john", "doe")
+    val person2 = Person("ann", "caporicci")
+    val person3 = Person("hassan", "abid")
 }

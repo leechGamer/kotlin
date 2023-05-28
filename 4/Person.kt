@@ -1,20 +1,8 @@
-import java.lang.IllegalArgumentException
 
-class Person(fullName: String) {
-    val firstName: String
-    val familyName: String
-
-    init {
-        val names = fullName.split(" ")
-        if (names.size != 2) {
-            throw IllegalArgumentException("Invalid name: $fullName")
-        }
-        firstName = names[0]
-        familyName = names[1]
+class Person(firstName: String, familyName: String) {
+    val fullName = "$firstName $familyName"
+    fun printFirstName() {
+        println(firstName) // Error: not available 
+        // 주생성자 파라미터를 property 초기화나 init 블록 밖에서 사용할 수 없다
     }
-}
-
-fun main() {
-    val person = Person("John Doe")
-    println(person.firstName) // John
 }

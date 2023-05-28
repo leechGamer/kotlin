@@ -1,18 +1,9 @@
 class Person {
-    val firstName: String
-    val familyName: String
+    val fullName: String
 
-    constructor(firstName: String, familyName: String) {
-        this.firstName = firstName
-        this.familyName = familyName
-    }
-
+    constructor(firstName: String, familyName: String): // : (콜론)을 넣고 그 뒤에 일반 함수를 호출하는 거처럼 코드를 작성하되 함수 이름 대신 this를 사용하면 생성자 위임 호출이 된다 
+            this("$firstName $familyName")
     constructor(fullName: String) {
-        val names = fullName.split(" ")
-        if (names.size != 2) {
-            throw IllegalArgumentException( " Invalid name : $fullName" )
-        }
-        firstName = names[0]
-        familyName = names[1]
+        this.fullName = fullName
     }
 }

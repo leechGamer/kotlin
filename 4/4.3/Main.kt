@@ -1,17 +1,14 @@
 import java.lang.IllegalArgumentException
 
-class Person (val firstName: String, val familyName: String) {
-    var age: Int? = null
+class Person (var firstName: String, var familyName: String) {
+    var fullName: String
+        get(): String = "$firstName $familyName"
         set(value) {
-            if (value != null && value <= 0) {
-                throw IllegalArgumentException("Invalid age: $value")
+            val names = value.split(" ")
+            if (names.size != 2) {
+                throw IllegalArgumentException("Invalid full name: $value")
             }
-            field = value
+            firstName = names[0] 
+            familyName = names[1]
         }
-}
-
-fun main() {
-    val p = Person("first", "second")
-    p.age = 20
-    println(p.age)
 }

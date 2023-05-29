@@ -1,12 +1,17 @@
-class Person (val firstName: String, val familyName: String, age: Int) {
-    val age: Int = age
-        get(): Int {
-            println("Accessing age")
-            return field
+import java.lang.IllegalArgumentException
+
+class Person (val firstName: String, val familyName: String) {
+    var age: Int? = null
+        set(value) {
+            if (value != null && value <= 0) {
+                throw IllegalArgumentException("Invalid age: $value")
+            }
+            field = value
         }
 }
 
 fun main() {
-    val p = Person("first", "second", 1)
-    p.age
+    val p = Person("first", "second")
+    p.age = 20
+    println(p.age)
 }

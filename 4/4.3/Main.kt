@@ -1,5 +1,12 @@
-class Person (val firstName: String, val familyName: String) {
-    // 코틀린 1.1 부터는 property와 getter 정의에서 property타입을 생략하고 타입추론에 의존하면 된다.
-    val fullName
-        get() = "$firstName $familyName"
+class Person (val firstName: String, val familyName: String, age: Int) {
+    val age: Int = age
+        get(): Int {
+            println("Accessing age")
+            return field
+        }
+}
+
+fun main() {
+    val p = Person("first", "second", 1)
+    p.age
 }

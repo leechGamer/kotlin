@@ -1,14 +1,11 @@
-import java.lang.IllegalArgumentException
+import java.util.*
 
-class Person (var firstName: String, var familyName: String) {
-    var fullName: String
-        get(): String = "$firstName $familyName"
+class Person(name: String) {
+    var lastChanged: Date? = null
+        private set // Person class 밖에서 변경할 수 없다
+    var name: String = name
         set(value) {
-            val names = value.split(" ")
-            if (names.size != 2) {
-                throw IllegalArgumentException("Invalid full name: $value")
-            }
-            firstName = names[0] 
-            familyName = names[1]
+            lastChanged = Date()
+            field = value
         }
 }

@@ -1,7 +1,7 @@
 import java.io.File
 
 class Content {
-    var text: String? = null
+    lateinit var text: String
     fun loadFile(file: File) {
         text = file.readText()
     }

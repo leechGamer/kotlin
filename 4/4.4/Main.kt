@@ -1,10 +1,12 @@
-// 익명 객체 타입은 지역 선언이나 비공개 선언에만 전달될 수 있다
-
-fun midPoint(xRange: IntRange, yRange: IntRange) = object {
-    val x = (xRange.first + xRange.last)/2
-    val y = (xRange.first + xRange.last)/2
-}
+// 객체 식도 자신을 둘러싼 코드 영역의 변수를 포획할 수 있다.
 fun main() {
-    val mid = midPoint(1..5, 2..6)
-    println("${mid.x}, ${mid.y}") // Unresolved reference: x, y
+    var x = 1
+
+    val o = object {
+        fun change() {
+            x = 2
+        }
+    }
+    o.change()
+    println(x) // 2
 }

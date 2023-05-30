@@ -1,7 +1,8 @@
-fun printMiddle(xRange: IntRange, yRange: IntRange) {
-    object MidPoint { // Named object 'MidPoint' is a singleton and cannot be local. Try to use anonymous object instead
-        val x = (xRange.first + xRange.last) / 2
-        val y = (yRange.first + yRange.last) / 2
+// 객체식의 타입이 익명 객체 타입이며 지역변수나 프로퍼티의 타입도 마찬가지 일 수 있음을 보여준다
+fun main() {
+    val o = object { // 익명 객체 타입이 추론된다.
+        val x = readLine()!!.toInt()
+        val y = readLine()!!.toInt()
     }
-    println("${MidPoint.x}, ${MidPoint.y}")
+    println(o.x + o.y)
 }

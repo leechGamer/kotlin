@@ -1,12 +1,12 @@
-// 람다 파라미터를 밑줄 기호로 지정할 수 있다.
-fun check(s: String, condition: (Int, Char) -> Boolean) : Boolean {
-    for (i in s.indices) {
-        if (!condition(i, s[i])) return false
+fun check(s: String, condition: (Char)-> Boolean) : Boolean {
+    for (c in s) {
+        if (!condition(c)) return false
     }
     return true
 }
+fun isCapitalLetter(c: Char) = c.isUpperCase() && c.isLetter()
 
 fun main() {
-    println(check("hello") { _, c -> c.isLetter() })
-    println(check("hello") { i, c -> i == 0 || c.isLowerCase() })
+    println(check("hello") {c -> isCapitalLetter(c)})
+    println(check("hello") {isCapitalLetter(it)})
 }

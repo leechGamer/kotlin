@@ -9,4 +9,5 @@ fun isCapitalLetter(c: Char) = c.isUpperCase() && c.isLetter()
 fun main() {
     println(check("hello") {c -> isCapitalLetter(c)})
     println(check("hello") {isCapitalLetter(it)})
+    println(check("hello", ::isCapitalLetter(it))
 }

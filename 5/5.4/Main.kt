@@ -1,7 +1,5 @@
-// IntRange클래스의 companion object에 대한 확장 함수를 정의한다.
-fun IntRange.Companion.singletonRange(n: Int) = n..n
-
-fun main() {
-    println(IntRange.singletonRange(5))
-    println(IntRange.Companion.singletonRange(3))
+// 동반 객체가 존재하는 경우에만 동반 객체에 대한 확장을 정의할 수 있다
+class Person(val firstName: String, val familyName: String) {
+    companion object
 }
+val Person.Companion.UNKNOWN by lazy { Person("J", "D") }

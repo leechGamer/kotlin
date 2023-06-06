@@ -1,8 +1,16 @@
-// 확장 프로퍼티: 다른 일반 멤버 프로퍼티와 마찬가지 방법으로도 확장 프로퍼티에 접근할 수 있다.
-val IntRange.leftHalf: IntRange
-    get() = start.. (start + endInclusive) / 2
+val IntArray.midIndex // 확장 프로퍼티 midIndex
+    get() = lastIndex / 2
+
+var IntArray.midValue // 확장 프로퍼티 midValue
+    get() = this[midIndex]
+    set(value) {
+        this[midIndex] = value
+    }
 
 fun main() {
-    println((1..3).leftHalf)
-    println((3..6).leftHalf)
+    val numbers = IntArray(6) { it * it }
+
+    println(numbers.midValue)
+    numbers.midValue *= 10
+    println(numbers.midValue)
 }

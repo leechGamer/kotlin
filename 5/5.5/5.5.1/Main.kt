@@ -1,5 +1,6 @@
-// with
-// run 과 비슷하지만 확장함수 타입이 아니므로 수신객체를 첫번째 인자로 넘겨야한다.
+// 문맥 없는 run
+// run 을 오버로딩
+// 문맥 식이 없고 람다 값을 반환하기만 함
 class Address (
     var zipCode: Int =0,
     var city: String = "",
@@ -11,17 +12,16 @@ class Address (
 
         return readln() == "OK"
     }
+
+    fun asText() = "$city $street $house"
 }
 
 fun main() {
-    val message = with(Address(
+    val addr = Address(
         zipCode = 123,
         city = "seoul",
         street = "baker st",
         house = "221bn"
-    )) {
-        "Address : $city"
-    }
-
-    println(message)
+    )
+    println(addr.asText())
 }

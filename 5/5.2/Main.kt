@@ -1,8 +1,10 @@
-// 다른 패키지에 최상위 확장 함수가 정의된 경우, 확장함수를 호출하기 전에 반드시 확장을 import !
-package main
-
-import util.truncate
+// nullable 한 수신 객체 타입
+fun String?.truncate(maxL: Int): String? {
+    if(this == null) return null
+    return if(length <= maxL) this else substring(0, maxL)
+}
 
 fun main() {
-    println("hello".truncate(3))
+    val s = readLine()
+    println(s.truncate(3))
 }

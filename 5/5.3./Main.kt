@@ -1,16 +1,8 @@
-val IntArray.midIndex // 확장 프로퍼티 midIndex
-    get() = lastIndex / 2
-
-var IntArray.midValue // 확장 프로퍼티 midValue
-    get() = this[midIndex]
-    set(value) {
-        this[midIndex] = value
-    }
+// 확장 프로퍼티에서도 위임을 사용할 수 있다.
+// 하지만 위임식이 프로퍼티의 수신객체에 접근할 수 없다.
+val String.message by lazy{"hello"}
 
 fun main() {
-    val numbers = IntArray(6) { it * it }
-
-    println(numbers.midValue)
-    numbers.midValue *= 10
-    println(numbers.midValue)
+    println("Hello".message)
+    println("Bye".message)
 }

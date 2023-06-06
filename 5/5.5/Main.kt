@@ -1,17 +1,15 @@
-// 수신 객체가 있는 함숫값을 정의하는 호출 가능 참조를 만들 수 있다.
-// 1. 클래스 멤버를 바탕으로
-// 2. 확장 선언을 바탕으로
-fun aggregate(numbers: IntArray, op: Int.(Int) -> Int) :Int {
+// 수신 객체가 없는 호출 가능 참조를
+// 수신 객체가 필요한 함수 타입의 값 대신 사용 가능
+// Int.(Int) -> Int 타입의 파라미터를 받는 고차 함수에 인자가 두 개인 :: max를 전달해도 됨
+fun aggregate(numbers: IntArray, op: Int.(Int) -> Int): Int {
     var result = numbers.firstOrNull()
-        ?: throw IllegalArgumentException("empty array")
+        ?: throw IllegalArgumentException("empty Array")
 
-    for (i in 1..numbers.lastIndex) result = result.op(numbers[i])
+    for(i in  1.. numbers.lastIndex) result = result.op(numbers[i])
+
     return result
 }
-fun Int.max(other: Int) = if (this > other) this else other // 확장 선언
-
+fun max(a: Int, b: Int) = if(a > b) a else b
 fun main() {
-    val numbers = intArrayOf(1, 2, 3, 4)
-    println(aggregate(numbers, Int::plus)) // case 1
-    println(aggregate(numbers, Int::max)) // case 2
+    println(aggregate(intArrayOf(1,2,3,4), ::max))
 }

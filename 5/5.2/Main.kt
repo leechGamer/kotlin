@@ -1,7 +1,10 @@
-fun String.truncate(maxLength: Int): String {
-    return if (length <= maxLength) this else substring(0, maxLength)
-}
+// binding 된 호출 가능 참조 위치에 사용할 수도 있다
+class Person(val name: String, val age: Int)
+
+fun Person.hasName(name: String) = name.equals(this.name, ignoreCase = true)
+
 fun main() {
-    println("hello".truncate(10))
-    println("hello".truncate(3))
+    val f = Person("John", 25)::hasName //
+    println(f("John"))
+    println(f("Jake"))
 }

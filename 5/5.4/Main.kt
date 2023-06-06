@@ -1,12 +1,13 @@
-// 코틀린에서는 람다나 익명함수에 대해서돋 확장 수신 객체를 활용할 수 있다. 
+// 수신 객체가 있는 함수값을 호출할 때는
+// 확장함수가 아닌 일반 함수형태로 호출할 수도 있다
+
 fun aggregate(numbers: IntArray, op: Int.(Int) -> Int): Int {
-    var result = numbers.firstOrNull() ?: throw IllegalArgumentException("Empty array")
+    var result = numbers.firstOrNull()
+        ?: throw IllegalArgumentException("empty array")
 
-    for (i in 1..numbers.lastIndex) result = result.op(numbers[i])
-
+    for (i in 1..numbers.lastIndex) {
+        //result = result.op(numbers[i]) // 확장함수 문법 이용
+        result = op(result, numbers[i]) // 비확장함수 호출
+    }
     return result
 }
-
-fun sum(numbers: IntArray) = aggregate(numbers){ op -> this + op} // 람다에 대해서도 확장 수신 객체를 활용할 수 있다
-fun sum2(numbers: IntArray) = aggregate(numbers, fun Int.(op: Int) = this + op) // 익명함수에 대해서도 확장 함수 뭄법을 사용할 수 있다
-

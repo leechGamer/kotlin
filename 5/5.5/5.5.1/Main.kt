@@ -1,15 +1,15 @@
-// let 함수
-class Address(val city: String, val street: String, val house: String) {
-    fun post(message: String) {}
+// let 함수: 처리해야 하는 값을 무조건 널이 될 수 없는 값으로만 전달해야 한다면
+
+import java.lang.NumberFormatException
+
+fun readInt() = try {
+    readLine()?.toInt()
+} catch (e: NumberFormatException) {
+    null
 }
-fun main() {
-    Address("London", "Baker Street", "221b").let {
-        println("To city: ${it.city}")
-        it.post("Hello")
-    }
-    
-     Address("London", "Baker Street", "221b").let { addr -> 
-        println("To city: ${it.city}")
-        it.post("Hello")
-    }
+
+fun main(args: Array<String>) {
+    val index = readInt()
+    val arg = if (index != null) args.getOrNull(index) else null
+    if (arg != null) println(arg)
 }

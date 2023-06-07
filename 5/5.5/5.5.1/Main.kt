@@ -10,6 +10,6 @@ fun readInt() = try {
 
 fun main(args: Array<String>) {
     val index = readInt()
-    val arg = if (index != null) args.getOrNull(index) else null
+    val arg = index?.let { args.getOrNull(it) } // let을 활용해 간단히 notnull로 표현
     if (arg != null) println(arg)
 }

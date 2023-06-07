@@ -1,4 +1,4 @@
-// apply 함수 : 반환값을 만들어내지 않고 객체 상태를 설정
+// also : 인자가 하나 있는 람다를 파라미터로 받는다
 class Address {
     var city: String = ""
     var street: String = ""
@@ -8,10 +8,11 @@ class Address {
 }
 
 fun main() {
-    val  message = readLine()?: return
-    Address().apply {
-        city = "London"
-        street = "Baker Street"
-        house = "221b"
+    val  message = readLine() ?: return
+    
+    Address().also {
+        it.city = "London"
+        it.street = "Baker Street"
+        it.house = "221b"
     }.post(message)
 }

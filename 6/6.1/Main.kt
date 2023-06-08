@@ -1,11 +1,13 @@
-// 6.1.3 enum class의 공통 멤버 사용하기
-enum class Direction {
-    NORTH, WEST, SOUTH, EAST;
+// values 메서드, enumValues, enumValueOf
+enum class WeekDay {
+    MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY;
 }
+private val weekDays = WeekDay.values()
+val WeekDay.nextDay get() = weekDays[(ordinal + 1) % weekDays.size]
+
 
 fun main() {
-    println(Direction.WEST.name) // WEST
-    println(Direction.WEST.ordinal) // 2
-    println(Direction.WEST != Direction.NORTH) // true
-    println(Direction.WEST <= Direction.EAST) // true
+    val weekDays = enumValues<WeekDay>()
+    println(weekDays[2])
+    println(enumValueOf<WeekDay>("THURSDAY"))
 }

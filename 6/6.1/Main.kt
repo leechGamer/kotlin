@@ -1,12 +1,11 @@
-// 6.1.2 커스텀 멤버가 있는 enum 정의하기
-enum class WeekDay {
-    MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY;
-
-    val lowerCaseName get() = name.lowercase()
-    fun isWorkday() = this == SATURDAY || this == SUNDAY
+// 6.1.2 enum class에 생성자가 있으면 각 enum 상수의 정의 뒤에도 적절한 생성자 호출을 추가해야 한다. 
+enum class RainbowColor(val isCold: Boolean) {
+    RED(false), ORANGE(false), YELLOW(false), GREEN(true), BLUE(true), INDIGO(true), VIOLET(true);
+    
+    val isWarm get() = !isCold
 }
 
 fun main() {
-    println(WeekDay.MONDAY.isWorkday())
-    println(WeekDay.WEDNESDAY.lowerCaseName)
+    println(RainbowColor.RED.isCold)
+    println(RainbowColor.GREEN.isWarm)
 }

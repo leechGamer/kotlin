@@ -1,7 +1,11 @@
-// 6.1.2 enum 의 본문에 정의된 멤버를 해당 본문이 아닌 부분에서 접근할 수 없다
-enum class WeekDay {
-    MONDAY { fun startWork() = println("work week started") },
-    TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+// 6.1.3 enum class의 공통 멤버 사용하기
+enum class Direction {
+    NORTH, WEST, SOUTH, EAST;
 }
 
-fun main() = WeekDay.MONDAY.startWork() // Error:: Unresolved reference: startWork
+fun main() {
+    println(Direction.WEST.name) // WEST
+    println(Direction.WEST.ordinal) // 2
+    println(Direction.WEST != Direction.NORTH) // true
+    println(Direction.WEST <= Direction.EAST) // true
+}

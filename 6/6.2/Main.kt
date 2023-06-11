@@ -1,13 +1,16 @@
-// triplet / pair
+import kotlin.random.Random
+
+data class Person(val first: String, val family: String, val age: Int)
+
+fun newPerson() = Person(readln()!!, readln()!!, Random.nextInt(100))
+
 fun main() {
-    val pair = Pair(1, "two")
+    val person = newPerson()
+    val first = person.first
+    val family = person.family
+    val age = person.age
 
-    println(pair.first + 1) // 2
-    println("${pair.second}!") // two!
-
-    val triple = Triple("one", 2, false)
-
-    println("${triple.first}!") // one!
-    println(triple.second - 1) // 1
-    println(!triple.third)// true
+    if (age < 18) {
+        println("$first $family is under-age")
+    }
 }

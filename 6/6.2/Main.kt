@@ -1,11 +1,13 @@
-// 모든 데이터 클래스는 암시적으로 copy() 함수를 제공한다.
-data class Person(val firstName: String, val familyName: String, val age: Int)
-
-fun Person.show() = println("$firstName $familyName: $age")
+// triplet / pair
 fun main() {
-    val person = Person("j", "doe", 25)
+    val pair = Pair(1, "two")
 
-    person.show()
-    person.copy(familyName = "smith").show()
-    person.copy(age = 30, firstName = "jane").show()
+    println(pair.first + 1) // 2
+    println("${pair.second}!") // two!
+
+    val triple = Triple("one", 2, false)
+
+    println("${triple.first}!") // one!
+    println(triple.second - 1) // 1
+    println(!triple.third)// true
 }

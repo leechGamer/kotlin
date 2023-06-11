@@ -7,6 +7,6 @@ data class Person(val firstName: String, val familyName: String) {
 fun main() {
     val person = Person("john", "doe").apply { age = 25 }
     val person2 = Person("john", "doe").apply { age = 26 }
-    println(person == person2) // Person(firstName=john, familyName=doe, age=25)
+    println(person == person2) // true
 
 }

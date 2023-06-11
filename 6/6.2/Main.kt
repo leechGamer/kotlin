@@ -1,18 +1,33 @@
-// 구조 분해 선언
+data class Person(
+    val family: String,
+    val name: String,
+    val age: Int,
+)
 
-data class Person(val first: String, val family: String, val age: Int)
-
+fun combine(
+    person1: Person,
+    person2: Person,
+    folder: ((String, Person) -> String)): String
+{
+    return  folder(folder("", person1), person2)
+}
 
 fun main() {
-    val (name) = Person("john", "doe", 25)
-    println(name)
+    // for 루프에서 구조 분해
+    val pairs = arrayOf(1 to "one", 2 to "two", 3 to "three")
 
-    val (_, family) = Person("john", "doe", 25)
-    println(family)
+    for ((number, name) in pairs) {
+        println("$number: $name")
+    }
+    println("=====")
+    val p1 = Person("joh", "doe", 25)
+    val p2 = Person("joh", "doe", 26)
 
-    var (firstName, familyName) = Person("JOHN", "DOE", 25)
-    firstName = firstName.lowercase()
-    familyName = familyName.lowercase()
-    println("$firstName $familyName") // john doe
+    // 구조 분해를 쓰지 않음
+    println(combine(p1, p2) {text, person -> "$text ${person.age}"})
+
+    // 구조 분해를 씀
+    println(combine(p1, p2) { text, (first)-> "$text $first"})
+    println(combine(p1, p2) { text, (_, family) -> "$text $family"})
 }
 

@@ -1,12 +1,9 @@
-// class -> data class 컴파일러가 주생성자에 정의된 
-// 프로퍼티의 값을 서로 비교하는 동등성 비교 연산을 자동으로 생성해주기 때문에 두 비교가 true가 된다.
+// deep equality가 이뤄지는지 여부는 프로퍼티의 타입으로 어떤 타입이 들어있으냐에 따라 다르다.
 data class Person(val firstName: String, val familyName: String, val age: Int)
 
+data class Mailbox(val address: String, val person: Person)
 fun main() {
-    val person1 = Person("jo", "doe", 25)
-    val person2 = Person("jo", "doe", 25)
-    val person3 = person1
-
-    println(person1 == person2) // true
-    println(person1 == person3) // true
+    val b1 = Mailbox("unknown", Person("john", "doe", 25))
+    val b2 = Mailbox("unknown", Person("john", "doe", 25))
+    println(b1 == b2) // true
 }

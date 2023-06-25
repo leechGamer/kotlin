@@ -1,9 +1,10 @@
-// 8.1.2 데이터를 상위 클래스 생성자에게 전달해야 할 때
+// 8.1.2 부모 클래스의 부생성자 이용하기
+open class Person (val name: String, val age: Int)
 
-open class Person(val name: String, val age: Int)
-
-class Student(name: String, age: Int, val university: String) : Person(name, age)
-
-fun main() {
-    Student("susan", 25, "MIT")
+class Student: Person {
+    private val university: String
+    constructor(name: String, age: Int, university: String) :
+            super(name, age) {
+        this.university = university
+    }
 }

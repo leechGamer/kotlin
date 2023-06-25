@@ -1,4 +1,4 @@
-// 8.1.2 가상함수 예제
+8.1.2 가상함수
 open class Person(
     val name: String,
     val age: Int

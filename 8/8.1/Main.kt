@@ -19,3 +19,13 @@ class Boat: Vehicle() {
         println("I am sailng")
     }
 }
+
+fun startAndStop(vehicle: Vehicle) {
+    vehicle.start()
+    vehicle.stop()
+}
+
+fun main() {
+    startAndStop(Car())
+    startAndStop(Boat())
+}

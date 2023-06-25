@@ -1,22 +1,9 @@
-// 8.1.2 하위 클래스 초기화
-// 상위 클래스에서부터 하위 클래스 순서로 초기화 진행
-open class Vehicle {
-    init {
-        println("Initializing Vehicle")
-    }
-}
-open class Car: Vehicle() {
-    init {
-        println("Initializing Car")
-    }
-}
+// 8.1.2 데이터를 상위 클래스 생성자에게 전달해야 할 때
 
-class Truck: Car() {
-    init {
-        println("Initializing Truck")
-    }
-}
+open class Person(val name: String, val age: Int)
+
+class Student(name: String, age: Int, val university: String) : Person(name, age)
 
 fun main() {
-    Truck()
+    Student("susan", 25, "MIT")
 }

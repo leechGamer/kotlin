@@ -1,20 +1,13 @@
-// 8.1.1 protected
+// 8.1.1 super 키워드
 open class Vehicle {
-    protected open fun onStart() {} // 하위클래스만 접근 가능
-    fun start() {
-        println("Starting up..")
-        onStart()
-    }
+    open fun start(): String? = "I am moving"
 }
-
-class Car: Vehicle() {
-    override fun onStart() {
-        println("Its a car")
+open class Car: Vehicle() {
+    override fun start(): String? {
+        return super.start() + "in a car"
     }
 }
 
 fun main() {
-    val car = Car()
-    car.start()
-    car.onStart() // Cannot access 'onStart': it is protected in 'Car'
+    println(Car().start())
 }

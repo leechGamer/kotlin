@@ -1,13 +1,22 @@
-// 8.1.1 super 키워드
+// 8.1.2 하위 클래스 초기화
+// 상위 클래스에서부터 하위 클래스 순서로 초기화 진행
 open class Vehicle {
-    open fun start(): String? = "I am moving"
+    init {
+        println("Initializing Vehicle")
+    }
 }
 open class Car: Vehicle() {
-    override fun start(): String? {
-        return super.start() + "in a car"
+    init {
+        println("Initializing Car")
+    }
+}
+
+class Truck: Car() {
+    init {
+        println("Initializing Truck")
     }
 }
 
 fun main() {
-    println(Car().start())
+    Truck()
 }

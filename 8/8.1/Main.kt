@@ -1,13 +1,12 @@
-// 8.1.3 is 연산자
-val obj = arrayOf("1", 2, "3", 4)
-
-var sum = 0
-
+// 8.1.3 조건 안에서의 스마트 캐스트
 fun main() {
-    for (o in obj) {
-       if (o is Int) {
-           sum += o // obj 타입을 Int로 세분화 함
-       }
+    val objects = arrayOf("1",2,"3",4)
+    var sum = 0
+    for(o in objects) {
+        when(o) {
+            is Int -> sum += o
+            is String -> sum += o.toInt()
+        }
     }
-    println(sum) // 6
+    println(sum)
 }

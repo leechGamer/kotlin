@@ -1,18 +1,14 @@
-// 8.1.3 프로퍼티나 커스텀 접근자가 정의된 변수에 대해서는 스마트 캐스트를 쓸 수 없다
-class Holder {
-    val o: Any get() = ""
-}
-
+// 8.1.3 가변 변수일 때 검사하는 시점과 변수를 읽는 시점 사이에 값을 명시적으로 변경하거나 어떤 람다 안에서 변수를 변경하면 스마트캐스트 되지 않는다
 fun main() {
-    val o: Any by lazy { 123 }
-
+    var o: Any = 123
     if (o is Int) {
-        println(o*2) //error: Smart cast to 'Int' is impossible, because 'o' is a property that has open or custom getter
+        println(o + 1) // Ok: Int로 스마트 캐스트
+        o = ""
+        println(o.length) // Ok: String으로 스마트 캐스트
     }
-
-    val holder = Holder()
-
-    if (holder.o is String) {
-        println(holder.o.length) // error: smart cast to "String" is impossible
+    if (o is String) {
+        val f = {o = 123}
+        println(o.length) // error: smart cast 불가 
+        // Smart cast to 'String' is impossible, because 'o' is a local variable that is captured by a changing closure
     }
 }

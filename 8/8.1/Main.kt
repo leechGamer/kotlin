@@ -1,10 +1,29 @@
-// 8.1.3 커스텀 동등성 연산
-// 프로퍼티는 같지만 두 인스턴스가 같은 객체로 간주되지 않는다.
+// 8.1.4 
 class Address(
     val city: String,
     val street: String,
     val house: String,
-)
+) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Address
+
+        if (city != other.city) return false
+        if (street != other.street) return false
+        if (house != other.house) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = city.hashCode()
+        result = 31 * result + street.hashCode()
+        result = 31 * result + house.hashCode()
+        return result
+    }
+}
 
 open class Entity(
     val name: String,
@@ -30,5 +49,13 @@ fun main() {
         Address("Sydney", "NOrteh road", "129"),
     )
 
-    println(address.indexOf(Address("Sydney", "NOrteh road", "129"))) // -1
+    println(address.indexOf(Address("Sydney", "NOrteh road", "129"))) // 2
+    val addr1 = Address("London", "Lane", "8A")
+    val addr2 = addr1
+    val addr3 = Address("London", "Lane", "8A")
+
+    println(addr1 === addr2) // t
+    println(addr1 == addr2) // t
+    println(addr1 === addr3) // f
+    println(addr1 == addr3) // t
 }

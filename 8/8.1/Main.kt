@@ -1,12 +1,18 @@
-// 8.1.3 조건 안에서의 스마트 캐스트
+// 8.1.3 프로퍼티나 커스텀 접근자가 정의된 변수에 대해서는 스마트 캐스트를 쓸 수 없다
+class Holder {
+    val o: Any get() = ""
+}
+
 fun main() {
-    val objects = arrayOf("1",2,"3",4)
-    var sum = 0
-    for(o in objects) {
-        when(o) {
-            is Int -> sum += o
-            is String -> sum += o.toInt()
-        }
+    val o: Any by lazy { 123 }
+
+    if (o is Int) {
+        println(o*2) //error: Smart cast to 'Int' is impossible, because 'o' is a property that has open or custom getter
     }
-    println(sum)
+
+    val holder = Holder()
+
+    if (holder.o is String) {
+        println(holder.o.length) // error: smart cast to "String" is impossible
+    }
 }

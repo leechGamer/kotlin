@@ -1,4 +1,3 @@
-// 8.1.4 
 class Address(
     val city: String,
     val street: String,
@@ -23,24 +22,59 @@ class Address(
         result = 31 * result + house.hashCode()
         return result
     }
+
+    override fun toString(): String {
+        return "Address(city='$city', street='$street', house='$house')"
+    }
 }
 
 open class Entity(
     val name: String,
     val address: Address
-)
 
+) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Entity
+
+        if (name != other.name) return false
+        if (address != other.address) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = name.hashCode()
+        result = 31 * result + address.hashCode()
+        return result
+    }
+
+    override fun toString(): String {
+        return "Entity(name='$name', address=$address)"
+    }
+}
+// 8.1.4 커스텀 동등성 연산
 class Person(
     name: String,
     address: Address,
     val age: Int,
-): Entity(name, address)
+): Entity(name, address) {
+    override fun toString(): String {
+        return "Person(age=$age)"
+    }
+}
 
 class Organization(
     name: String,
     address: Address,
-    val manager: Person
-): Entity(name, address)
+    val manager: Person?
+): Entity(name, address) {
+    override fun toString(): String {
+        return "Organization(manager=$manager)"
+    }
+}
 
 fun main() {
     val address = arrayOf(
@@ -49,13 +83,10 @@ fun main() {
         Address("Sydney", "NOrteh road", "129"),
     )
 
-    println(address.indexOf(Address("Sydney", "NOrteh road", "129"))) // 2
-    val addr1 = Address("London", "Lane", "8A")
-    val addr2 = addr1
-    val addr3 = Address("London", "Lane", "8A")
-
-    println(addr1 === addr2) // t
-    println(addr1 == addr2) // t
-    println(addr1 === addr3) // f
-    println(addr1 == addr3) // t
+    println(Person("euan", Address("London", "Lane", "8A"), 25))
+    println(Organization(
+        "thriftoc",
+        Address("London", "Lane", "8A"),
+        null)
+    )
 }

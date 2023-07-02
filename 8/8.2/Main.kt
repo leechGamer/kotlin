@@ -1,35 +1,61 @@
-import kotlin.math.PI
-
-// 8.2.1 추상멤버: 타입, 파라미터, 반환 타입 등 함수나 프로퍼티의 기본적인 모습을 정의하지만 세부 구현은 생략한 멤버
-
-abstract class Shape {
-    abstract val width: Double
-    abstract val height: Double
-    abstract fun area(): Double
+// 8.2.2 인터페이스
+// 인터페이스는 클래스나 다른 인터페이스의 상위 타입이 될 수 있다
+interface Vehicle {
+    val currentSpeed: Int
+    fun move()
+    fun stop()
 }
 
-class Circle(val r: Double) : Shape() {
-    val diameter get() = 2 * r
-    override val width: Double
-        get() = diameter
-    override val height: Double
-        get() = diameter
 
-    override fun area() = PI * r * r
+interface FlyingVehicle: Vehicle {
+    val currentHeight: Int
+    fun takeOff()
+    fun land()
 }
 
-class Rectangle(
-    override val width: Double,
-    override val height: Double
-) : Shape() {
-    override fun area() = width * height
+// 비추상 클래스가 인터페이스를 상속할 때는 모든 추상 멤버에 대한 구현을 제공해야 한다.
+class Car: Vehicle {
+    override var currentSpeed: Int = 0
+
+        private set
+    override fun move() {
+        println("Riding..")
+        currentSpeed = 50
+    }
+
+    override fun stop() {
+        println("Stop..")
+        currentSpeed = 0
+    }
+
+    class Aircraft: FlyingVehicle {
+        override var currentSpeed = 0
+            private set
+
+        override fun move() {
+            println("Taxiing..")
+            currentSpeed = 50
+        }
+
+        override fun stop() {
+            println("Stopped")
+            currentSpeed = 0
+        }
+
+        override var currentHeight: Int = 0
+            private set
+
+        override fun takeOff() {
+            println("Taking off..")
+            currentSpeed = 500
+            currentHeight = 5000
+        }
+
+        override fun land() {
+            println("Landed..")
+            currentSpeed = 50
+            currentHeight = 0
+        }
+    }
 }
 
-fun Shape.print() {
-    println("Bounds: $width* $height, area: ${area()}")
-}
-
-fun main() {
-    Circle(10.0).print()
-    Rectangle(3.0, 5.0).print()
-}

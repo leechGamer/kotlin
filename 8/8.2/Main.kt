@@ -1,14 +1,27 @@
-// 8.2.2 인터페이스에 생성자나 상태를 사용할 수 없다는 제약은 다중 상속을 지원하기 위한 것으로 다이아몬드 상속 문제를 방지하는 데 있다.
+import java.lang.NumberFormatException
 
-interface Vehicle {
-    val currentSpeed: Int
+// 8.2.3 봉인된 클래스와 인터페이스
+
+enum class Result {
+    SUCCESS, ERROR
 }
 
-interface Car: Vehicle
+fun runComputation(): Result {
+    try {
+        val a = readLine()?.toInt() ?: return Result.ERROR
+        val b = readLine()?.toInt() ?: return Result.ERROR
 
-interface Ship: Vehicle
+        println("Sum: ${a + b}")
+    } catch (e: NumberFormatException) {
+        return Result.ERROR
+    }
+    return Result.SUCCESS
+}
 
-class Amphibia: Car, Ship {
-    override var currentSpeed = 0
-        private set
+fun main() {
+    val message = when(runComputation()) {
+        Result.SUCCESS -> "Completed successfully"
+        Result.ERROR -> "Error!"
+    }
+    println(message)
 }

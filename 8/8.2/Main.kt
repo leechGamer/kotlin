@@ -1,69 +1,14 @@
-// 인터페이스에 대한 생성자는 금지돼 있다.
+// 8.2.2 인터페이스에 생성자나 상태를 사용할 수 없다는 제약은 다중 상속을 지원하기 위한 것으로 다이아몬드 상속 문제를 방지하는 데 있다.
 
-interface Vehible {
-    constructor(name: String)
+interface Vehicle {
+    val currentSpeed: Int
 }
 
+interface Car: Vehicle
 
-// 다중 상속을 지원한다.
-interface Car {
-    fun ride()
-}
-
-interface Aircraft {
-    fun fly()
-}
-
-interface Ship {
-    fun sail()
-}
-
-interface FlyingCar: Car, Aircraft
-
-class Transformer: FlyingCar, Ship {
-    override fun ride() {
-        println("I am riding")
-    }
-
-    override fun fly() {
-        println("Fluginf")
-    }
-
-    override fun sail() {
-        println("Saiing")
-    }
-}
-
-// 합쳐지는 멤버에 대한 구현이 둥 이상의 상위 타입에 존재하는 경우 super 호출이 모호해진다.
-// 이럴때는 super를 상위 타입으로 한정시킨 키워드를 사용해야 한다.
-interface Car {
-    fun move() {
-        println("I am moving")
-    }
-}
-
-interface Ship {
-    fun move() {
-        println("I am sailing")
-    }
-}
+interface Ship: Vehicle
 
 class Amphibia: Car, Ship {
-    override fun move() {
-        super<Car>.move() // car의 메서드
-        super<Ship>.move() // ship의 메서드
-    }
+    override var currentSpeed = 0
+        private set
 }
-
-fun main() {
-    Amphibia().move()
-    /*      
-        I am moving
-        I am sailing
-    */
-}
-
-
-
-
-

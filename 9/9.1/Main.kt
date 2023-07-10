@@ -1,22 +1,23 @@
+// 타입 파라미터 바운드로 타입 파라미터를 사용할 수도 있으며, 이것을 재귀적 타입 파라미터라고 말한다.
+fun <T: Comparable<T>> TreeNode<T>.maxNode(): TreeNode<T> {
+    val maxChilde = children.maxByOrNull { it.data } ?: return this
 
-// 상위 바운드로 Number를 선언하기
-fun <T: Number>TreeNode<T>.average(): Double {
-    var count = 0
-    var sum = 0.0
-
-    walkDepthFirst {
-        count++
-        sum += it.toDouble()
-    }
-    return sum / count
+    return if (data >= maxChilde.data) this else maxChilde
 }
 
-// 타입 파라미터에 상위 바운드가 있으면 컴파일러는 이 타입 파라미터에 공급된 타입 인자의 타입이 상위 바운드의 하위 타입이지 검사한다.
-val intTree = TreeNode(1).apply {
-    addChild(2).addChild(3)
-    addChild(4).addChild(5)
-}
 
 fun main() {
-    println(intTree.average())
+    // Double은 comparable<Double>의 하위 타입임
+
+    val doubleTree = TreeNode(1.0).apply {
+        addChild(2.0)
+        addChild(3.0)
+    }
+
+    println(doubleTree.maxNode().data)
+
+    val stringTree = TreeNode("abc").apply {
+        addChildren("xyz", "def")
+    }
+    println(stringTree.maxNode().data)
 }

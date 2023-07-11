@@ -34,3 +34,23 @@ fun main() {
         addChild(3.0)
     }.toList(list)
 }
+
+
+
+// 타입 파라미터 구문 예제 ===
+fun<T: Any> notNullTreeOf(data: T) = TreeNode(data)
+
+
+// 타입 파라미터 구문 활용 예제 ===
+interface Named {
+    val name: String
+}
+
+interface Identified {
+    val id: Int
+}
+
+// where절을 클래스 선언 본문 앞에 추가하고 바운드할 타입 목록을 표시
+class Registry<T> where T: Named, T: Identified {
+    val items = ArrayList<T>()
+}

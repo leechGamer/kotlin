@@ -54,3 +54,21 @@ interface Identified {
 class Registry<T> where T: Named, T: Identified {
     val items = ArrayList<T>()
 }
+
+
+// where절을 클래스 선언 본문 앞에 추가하고 바운드할 타입 목록을 표시
+class Registry<T> where T: Named, T: Identified {
+    val items = ArrayList<T>()
+}
+
+// error: Cannot check for instance of erased type: T
+// 타입 소거 때문에 에러가 발생한다.
+//JVM에서 타입 인자에 대한 정보는 코드에서 지워지고
+//소스코드에서 List<String>이나 List<Number>같은 동일한 타입으로 합쳐진다.
+
+// 런타임에 제네릭 코드는 파라미터 타입의 차이를 인식할 수 없고 앞에서 본 data is T와 같은 검사는 의미가 없다.
+// isInstance() 함숙가 런타임에 호출될 때 T가 어떤 타입을 뜻할지 알 방법이 없다.
+
+fun <T>TreeNode<Any>.isInstanceOf(): Boolean = data is T && children.all{ it.isInstanceOf<T>() }
+
+

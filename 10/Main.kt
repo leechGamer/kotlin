@@ -50,5 +50,6 @@ class IO
 @Component("Log", Dependency("I/O"))
 class Logger
 
-@Component(dependency = Dependency("I/O", "LOG"))
+@Component(dependency = Dependency(["I/O", "Log"]))
 class Main
+

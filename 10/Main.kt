@@ -32,3 +32,23 @@ class Services
 @Deprecated("Deprecated")
 @Deprecated("Even more deprecated") // error: This annotation is not repeatable
 class OldClass
+
+
+// annotation 정의
+annotation class MyAnnotation(val text: String)
+@MyAnnotation("some useful info") fun annotatedFun() {}
+
+annotation class Dependency(vararg val componentNames: String)
+annotation class Component(
+    val name: String = "Core",
+    val dependency: Dependency = Dependency()
+)
+
+@Component("I/O")
+class IO
+
+@Component("Log", Dependency("I/O"))
+class Logger
+
+@Component(dependency = Dependency("I/O", "LOG"))
+class Main
